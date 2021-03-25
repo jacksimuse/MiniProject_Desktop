@@ -5,10 +5,138 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:WpfSMSApp"
         mc:Ignorable="d"
-        Title="Stock Management System" Height="700" Width="1200">
-    <Grid>
-        
-    </Grid>
+        Title="Stock Management System" Height="700" Width="1200" Icon="stock.png"
+        ContentRendered="MetroWindow_ContentRendered" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Height="70">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BtnBooks" 
+                    Grid.Column="0" 
+                    Content="입고" FontSize="16" 
+                    Foreground="White" Background="RoyalBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="Stock" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnProducts" 
+                    Grid.Column="1" 
+                    Content="제품" FontSize="16" 
+                    Foreground="White" Background="LightSkyBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="Cube" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnBookOut" 
+                    Grid.Column="2" 
+                    Content="출고" FontSize="16" 
+                    Foreground="White" Background="DodgerBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconFontAwesome Kind="SignOutAltSolid" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnStore" 
+                    Grid.Column="3" 
+                    Content="창고" FontSize="16" 
+                    Foreground="White" Background="CadetBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="Storage" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnSetting" 
+                    Grid.Column="4" 
+                    Content="설정" FontSize="16" 
+                    Foreground="White" Background="MidnightBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="Cogs" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnUser" 
+                    Grid.Column="5" 
+                    Content="사용자" FontSize="16" 
+                    Foreground="White" Background="LightSteelBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconMaterial Kind="AccountGroup" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnAccount" 
+                    Grid.Column="6" 
+                    Content="계정" FontSize="16" 
+                    Foreground="White" Background="CornflowerBlue" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="UserCard" Width="24" Height="24"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnLogOut" 
+                    Grid.Column="7" 
+                    Content="로그아웃" FontSize="16" 
+                    Foreground="White" Background="Gray" Margin="5,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="10, 0" VerticalAlignment="Center"/>
+                            <IconPacks:PackIconVaadinIcons Kind="Exit" Width="22" Height="22"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </Grid>
+        <Grid Background="WhiteSmoke">
+            <ContentControl x:Name="ActiveControl" /> <!-- 화면 전환 -->
+        </Grid>
+    </DockPanel>
 </mah:MetroWindow>

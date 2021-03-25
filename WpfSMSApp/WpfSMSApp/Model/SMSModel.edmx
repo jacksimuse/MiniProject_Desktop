@@ -1,0 +1,798 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Antenna">
+          <Key>
+            <PropertyRef Name="AntennaID" />
+          </Key>
+          <Property Name="AntennaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TxPower" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RxPower" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AntennaNumber" Type="int" Nullable="false" />
+          <Property Name="ReaderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="BarcodeID" />
+          </Key>
+          <Property Name="BarcodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BarcodeNumber" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookOut">
+          <Key>
+            <PropertyRef Name="BookOutID" />
+          </Key>
+          <Property Name="BookOutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Project" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookOutItem">
+          <Key>
+            <PropertyRef Name="BookOutItemID" />
+          </Key>
+          <Property Name="BookOutItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="BookOutID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BrandDescription" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CategoryDescription" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ItemStatus" Type="bit" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+          <Property Name="BarcodeID" Type="int" Nullable="false" />
+          <Property Name="BrandID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ReaderID" />
+          </Key>
+          <Property Name="ReaderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IPaddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumAntennas" Type="int" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="StoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="StoreLocation" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ItemStatus" Type="bit" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+          <Property Name="BarcodeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPC" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserIdentityNumber" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserSurname" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserAdmin" Type="bit" Nullable="false" />
+          <Property Name="UserActivated" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AntennaReader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="Antenna" Type="Self.Antenna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="Antenna">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOut_Item">
+          <End Role="BookOut" Type="Self.BookOut" Multiplicity="1" />
+          <End Role="BookOutItem" Type="Self.BookOutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookOut">
+              <PropertyRef Name="BookOutID" />
+            </Principal>
+            <Dependent Role="BookOutItem">
+              <PropertyRef Name="BookOutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOutItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="BookOutItem" Type="Self.BookOutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="BookOutItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOutUSer">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BookOut" Type="Self.BookOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BookOut">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemBarcode">
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barcode">
+              <PropertyRef Name="BarcodeID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BarcodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemBrand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReaderStore">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItem">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockStore">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMSModelStoreContainer">
+          <EntitySet Name="Antenna" EntityType="Self.Antenna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barcode" EntityType="Self.Barcode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookOut" EntityType="Self.BookOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookOutItem" EntityType="Self.BookOutItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reader" EntityType="Self.Reader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AntennaReader" Association="Self.FK_AntennaReader">
+            <End Role="Reader" EntitySet="Reader" />
+            <End Role="Antenna" EntitySet="Antenna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOut_Item" Association="Self.FK_BookOut_Item">
+            <End Role="BookOut" EntitySet="BookOut" />
+            <End Role="BookOutItem" EntitySet="BookOutItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOutItem_Item" Association="Self.FK_BookOutItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="BookOutItem" EntitySet="BookOutItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOutUSer" Association="Self.FK_BookOutUSer">
+            <End Role="User" EntitySet="User" />
+            <End Role="BookOut" EntitySet="BookOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemBarcode" Association="Self.FK_ItemBarcode">
+            <End Role="Barcode" EntitySet="Barcode" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemBrand" Association="Self.FK_ItemBrand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCategory" Association="Self.FK_ItemCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTag" Association="Self.FK_ItemTag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReaderStore" Association="Self.FK_ReaderStore">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItem" Association="Self.FK_StockItem">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockStore" Association="Self.FK_StockStore">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Antenna">
+          <Key>
+            <PropertyRef Name="AntennaID" />
+          </Key>
+          <Property Name="AntennaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TxPower" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RxPower" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AntennaNumber" Type="Int32" Nullable="false" />
+          <Property Name="ReaderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_AntennaReader" FromRole="Antenna" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Barcode">
+          <Key>
+            <PropertyRef Name="BarcodeID" />
+          </Key>
+          <Property Name="BarcodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BarcodeNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemBarcode" FromRole="Barcode" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="BookOut">
+          <Key>
+            <PropertyRef Name="BookOutID" />
+          </Key>
+          <Property Name="BookOutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Project" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookOutItem" Relationship="Self.FK_BookOut_Item" FromRole="BookOut" ToRole="BookOutItem" />
+          <NavigationProperty Name="User" Relationship="Self.FK_BookOutUSer" FromRole="BookOut" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BookOutItem">
+          <Key>
+            <PropertyRef Name="BookOutItemID" />
+          </Key>
+          <Property Name="BookOutItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="BookOutID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookOut" Relationship="Self.FK_BookOut_Item" FromRole="BookOutItem" ToRole="BookOut" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_BookOutItem_Item" FromRole="BookOutItem" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrandDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemBrand" FromRole="Brand" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemCategory" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemStatus" Type="Boolean" Nullable="false" />
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <Property Name="BarcodeID" Type="Int32" Nullable="false" />
+          <Property Name="BrandID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Barcode" Relationship="Self.FK_ItemBarcode" FromRole="Item" ToRole="Barcode" />
+          <NavigationProperty Name="BookOutItem" Relationship="Self.FK_BookOutItem_Item" FromRole="Item" ToRole="BookOutItem" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_ItemBrand" FromRole="Item" ToRole="Brand" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_ItemCategory" FromRole="Item" ToRole="Category" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_ItemTag" FromRole="Item" ToRole="Tag" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_StockItem" FromRole="Item" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ReaderID" />
+          </Key>
+          <Property Name="ReaderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IPaddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumAntennas" Type="Int32" Nullable="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Antenna" Relationship="Self.FK_AntennaReader" FromRole="Reader" ToRole="Antenna" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_ReaderStore" FromRole="Reader" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+          </Key>
+          <Property Name="StockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_StockItem" FromRole="Stock" ToRole="Item" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_StockStore" FromRole="Stock" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="StoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StoreLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemStatus" Type="Boolean" Nullable="false" />
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <Property Name="BarcodeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_ReaderStore" FromRole="Store" ToRole="Reader" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_StockStore" FromRole="Store" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemTag" FromRole="Tag" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserIdentityNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserSurname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="UserActivated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookOut" Relationship="Self.FK_BookOutUSer" FromRole="User" ToRole="BookOut" />
+        </EntityType>
+        <Association Name="FK_AntennaReader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="Antenna" Type="Self.Antenna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="Antenna">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemBarcode">
+          <End Role="Barcode" Type="Self.Barcode" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barcode">
+              <PropertyRef Name="BarcodeID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BarcodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOut_Item">
+          <End Role="BookOut" Type="Self.BookOut" Multiplicity="1" />
+          <End Role="BookOutItem" Type="Self.BookOutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookOut">
+              <PropertyRef Name="BookOutID" />
+            </Principal>
+            <Dependent Role="BookOutItem">
+              <PropertyRef Name="BookOutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOutUSer">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BookOut" Type="Self.BookOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BookOut">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOutItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="BookOutItem" Type="Self.BookOutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="BookOutItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemBrand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemCategory">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemTag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItem">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReaderStore">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockStore">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Antenna" EntityType="Self.Antenna" />
+          <EntitySet Name="Barcode" EntityType="Self.Barcode" />
+          <EntitySet Name="BookOut" EntityType="Self.BookOut" />
+          <EntitySet Name="BookOutItem" EntityType="Self.BookOutItem" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="Reader" EntityType="Self.Reader" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" />
+          <EntitySet Name="Store" EntityType="Self.Store" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_AntennaReader" Association="Self.FK_AntennaReader">
+            <End Role="Reader" EntitySet="Reader" />
+            <End Role="Antenna" EntitySet="Antenna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemBarcode" Association="Self.FK_ItemBarcode">
+            <End Role="Barcode" EntitySet="Barcode" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOut_Item" Association="Self.FK_BookOut_Item">
+            <End Role="BookOut" EntitySet="BookOut" />
+            <End Role="BookOutItem" EntitySet="BookOutItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOutUSer" Association="Self.FK_BookOutUSer">
+            <End Role="User" EntitySet="User" />
+            <End Role="BookOut" EntitySet="BookOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOutItem_Item" Association="Self.FK_BookOutItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="BookOutItem" EntitySet="BookOutItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemBrand" Association="Self.FK_ItemBrand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemCategory" Association="Self.FK_ItemCategory">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemTag" Association="Self.FK_ItemTag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItem" Association="Self.FK_StockItem">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReaderStore" Association="Self.FK_ReaderStore">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockStore" Association="Self.FK_StockStore">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMSModelStoreContainer" CdmEntityContainer="SMSEntities">
+          <EntitySetMapping Name="Antenna">
+            <EntityTypeMapping TypeName="SMSModel.Antenna">
+              <MappingFragment StoreEntitySet="Antenna">
+                <ScalarProperty Name="AntennaID" ColumnName="AntennaID" />
+                <ScalarProperty Name="TxPower" ColumnName="TxPower" />
+                <ScalarProperty Name="RxPower" ColumnName="RxPower" />
+                <ScalarProperty Name="AntennaNumber" ColumnName="AntennaNumber" />
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barcode">
+            <EntityTypeMapping TypeName="SMSModel.Barcode">
+              <MappingFragment StoreEntitySet="Barcode">
+                <ScalarProperty Name="BarcodeID" ColumnName="BarcodeID" />
+                <ScalarProperty Name="BarcodeNumber" ColumnName="BarcodeNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookOut">
+            <EntityTypeMapping TypeName="SMSModel.BookOut">
+              <MappingFragment StoreEntitySet="BookOut">
+                <ScalarProperty Name="BookOutID" ColumnName="BookOutID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookOutItem">
+            <EntityTypeMapping TypeName="SMSModel.BookOutItem">
+              <MappingFragment StoreEntitySet="BookOutItem">
+                <ScalarProperty Name="BookOutItemID" ColumnName="BookOutItemID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BookOutID" ColumnName="BookOutID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="SMSModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandDescription" ColumnName="BrandDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="SMSModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="SMSModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemStatus" ColumnName="ItemStatus" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="BarcodeID" ColumnName="BarcodeID" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reader">
+            <EntityTypeMapping TypeName="SMSModel.Reader">
+              <MappingFragment StoreEntitySet="Reader">
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="IPaddress" ColumnName="IPaddress" />
+                <ScalarProperty Name="NumAntennas" ColumnName="NumAntennas" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock">
+            <EntityTypeMapping TypeName="SMSModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store">
+            <EntityTypeMapping TypeName="SMSModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreLocation" ColumnName="StoreLocation" />
+                <ScalarProperty Name="ItemStatus" ColumnName="ItemStatus" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="BarcodeID" ColumnName="BarcodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="SMSModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="SMSModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserIdentityNumber" ColumnName="UserIdentityNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserAdmin" ColumnName="UserAdmin" />
+                <ScalarProperty Name="UserActivated" ColumnName="UserActivated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="없음" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
