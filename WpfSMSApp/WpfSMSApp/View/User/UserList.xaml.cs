@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MahApps;
+using MahApps.Metro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfSMSApp.View.Account
+namespace WpfSMSApp.View.User
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MyAccount : Page
+    public partial class UserList : Page
     {
-        public MyAccount()
+        public UserList()
         {
             InitializeComponent();
         }
@@ -29,14 +31,7 @@ namespace WpfSMSApp.View.Account
         {
             try
             {
-                var user = Commons.LOGINED_USER;
-                TxtUserID.Text = user.UserID.ToString();
-                TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurname.Text = user.UserName.ToString();
-                TxtUserName.Text = user.UserName.ToString();
-                TxtUserEmail.Text = user.UserEmail.ToString();
-                TxtUserAdmin.Text = user.UserAdmin.ToString();
-                TxtUserActivated.Text = user.UserActivated.ToString();
+                
             }
             catch (Exception ex)
             {
@@ -47,7 +42,27 @@ namespace WpfSMSApp.View.Account
 
         private void BtnEditMyAccount_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditAccount());
+            //NavigationService.Navigate(new EditAccount());
+        }
+
+        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEditUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDeactivateUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

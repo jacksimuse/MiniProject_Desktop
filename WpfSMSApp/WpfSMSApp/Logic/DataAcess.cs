@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,20 @@ namespace WpfSMSApp.Logic
             }
 
             return users;
+        }
+
+        /// <summary>
+        /// 입력, 수정 동시에...
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>0또는 1이상</returns>
+        internal static int SetUser(User user)
+        {
+            using (var ctx = new SMSEntities())
+            {
+                ctx.User.AddOrUpdate(user);
+                return ctx.SaveChanges(); // commit
+            }
         }
     }
 }
