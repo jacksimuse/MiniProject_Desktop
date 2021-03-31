@@ -86,8 +86,20 @@
                 <RadioButton x:Name="RdoDeactive" Content="비활성" Margin="5, 0" Checked="RdoDeactive_Checked"></RadioButton>
             </StackPanel>
 
-            <DataGrid x:Name="GrdData" Grid.Row="1">
-
+            <DataGrid x:Name="GrdData" Grid.Row="1"
+                      AutoGenerateColumns="False" SelectionUnit="FullRow"
+                      GridLinesVisibility="Vertical" 
+                      Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                      ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UserID}" Header="순번" Width="60" />
+                    <DataGridTextColumn Binding="{Binding UserIdentityNumber}" Header="사번" Width="1*" />
+                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="성" Width="1*" />
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="이름" Width="1*" />
+                    <DataGridTextColumn Binding="{Binding UserEmail}" Header="이메일" Width="2*" />
+                    <DataGridTextColumn Binding="{Binding UserAdmin}" Header="관리자여부" Width="85" />
+                    <DataGridTextColumn Binding="{Binding UserActivated}" Header="활성여부" Width="85" />
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <!-- 컨텐츠영역 끝 -->

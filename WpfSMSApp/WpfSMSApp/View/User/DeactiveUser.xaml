@@ -33,7 +33,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
 
         <!-- 제목입력 시작 -->
@@ -45,79 +45,27 @@
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"/>
         <!-- 버튼영역 끝 -->
 
+        <!-- 그리드영역 시작 -->
+        <DataGrid x:Name="GrdData" Grid.Row="1" Grid.Column="1"
+                      AutoGenerateColumns="False" SelectionUnit="FullRow"
+                      GridLinesVisibility="Vertical" 
+                      Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                      ItemsSource="{Binding}" SelectedCellsChanged="GrdData_SelectedCellsChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding UserID}" Header="순번" Width="50" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserIdentityNumber}" Header="사번" Width="1.2*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserSurname}" Header="성" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserName}" Header="이름" Width="1*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserEmail}" Header="이메일" Width="2*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserAdmin}" Header="관리자여부" Width="83" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding UserActivated}" Header="활성여부" Width="72" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- 그리드영역 끝 -->
+
+
         <!-- 컨텐츠영역 시작 -->
-        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Row="0" Content="순번" />
-            <Label Grid.Row="1" Content="사번" />
-            <Label Grid.Row="2" Content="성" />
-            <Label Grid.Row="3" Content="이름" />
-            <Label Grid.Row="4" Content="이메일" />
-            <Label Grid.Row="5" Content="패스워드" />
-            <Label Grid.Row="6" Content="관리자여부" />
-            <Label Grid.Row="7" Content="활성여부" />
-
-            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtUserID" Text="UserID" />
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtUserIdentityNumber" Margin="3" Width="200" 
-                         Text="Test" FontSize="14"  />
-                <TextBlock x:Name="LblUserIdentityNumber" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtUserSurName" Margin="3" Width="200" 
-                         Text="" FontSize="14" />
-                <TextBlock x:Name="LblUserSurName" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtUserName" Margin="3" Width="200" 
-                         Text="" FontSize="14" />
-                <TextBlock x:Name="LblUserName" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
-                <TextBox x:Name="TxtUserEmail" Margin="3" Width="200" 
-                         Text="" FontSize="14" />
-                <TextBlock x:Name="LblUserEmail" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                <PasswordBox x:Name="TxtUserPassword" Margin="3" Width="200" 
-                             FontSize="14" />
-                <TextBlock x:Name="LblUserPassword" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
-                <ComboBox x:Name="CboUserAdmin" Margin="3" Width="200" 
-                         Text="" FontSize="14" />
-                <TextBlock x:Name="LblUserAdmin" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
-                <ComboBox x:Name="CboUserActivated" Margin="3" Width="200" 
-                         Text="" FontSize="14" />
-                <TextBlock x:Name="LblUserActivated" Text="ErrorMessage" Foreground="OrangeRed" />
-            </StackPanel>
-
-            <TextBlock x:Name="LblResult" Grid.Row="8" Grid.Column="1" Text="" VerticalAlignment="Top"
-                       HorizontalAlignment="Left" FontSize="14" />
-        </Grid>
+        
         <!-- 컨텐츠영역 끝 -->
 
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 

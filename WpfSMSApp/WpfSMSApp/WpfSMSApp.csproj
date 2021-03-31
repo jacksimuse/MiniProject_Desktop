@@ -350,8 +350,12 @@
       <DependentUpon>SMSModel.edmx</DependentUpon>
       <LastGenOutput>SMSModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="stock.png" />
-    <None Include="Resources\stock.png" />
+    <Resource Include="stock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\stock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="Resources\sign_info.png" />
     <Resource Include="Resources\sign_check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

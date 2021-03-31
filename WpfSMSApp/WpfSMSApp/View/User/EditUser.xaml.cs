@@ -164,5 +164,26 @@ namespace WpfSMSApp.View.User
                 }
             }
         }
+
+        private void GrdData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            try
+            {
+                // 선택된 값이 입력창에 나오도록
+                var user = GrdData.SelectedItem as Model.User;
+
+                TxtUserID.Text = user.UserID.ToString();
+                TxtUserIdentityNumber.Text = user.UserIdentityNumber;
+                TxtUserSurName.Text = user.UserSurname;
+                TxtUserName.Text = user.UserName;
+                TxtUserEmail.Text = user.UserEmail;
+                CboUserAdmin.SelectedIndex = user.UserAdmin == false ? 0 : 1;
+                CboUserActivated.SelectedIndex = user.UserActivated == false ? 0 : 1;
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 GrdData_SelectedCellsChanged : {ex}");
+            }
+        }
     }
 }
