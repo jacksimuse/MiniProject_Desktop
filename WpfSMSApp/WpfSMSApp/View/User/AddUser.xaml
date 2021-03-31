@@ -1,13 +1,13 @@
 ﻿<Page 
-    x:Class="WpfSMSApp.View.Account.EditAccount"
+    x:Class="WpfSMSApp.View.User.AddUser"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:WpfSMSApp.View.Account"
+    xmlns:local="clr-namespace:WpfSMSApp.View.User"
     mc:Ignorable="d" 
     d:DesignHeight="630" d:DesignWidth="1200"
-    Title="EditAccount" Loaded="Page_Loaded">
+    Title="AddUser" Loaded="Page_Loaded">
     <Page.Resources>
         <Style TargetType="Label">
             <!-- {x:Type Label} -->
@@ -24,7 +24,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Margin="10">
+    <Grid Margin="10" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="1*" />
@@ -75,7 +75,7 @@
             <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtUserID" Text="UserID" />
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                 <TextBox x:Name="TxtUserIdentityNumber" Margin="3" Width="200" 
-                         Text="Test" FontSize="14" IsReadOnly="True" />
+                         Text="Test" FontSize="14"  />
                 <TextBlock x:Name="LblUserIdentityNumber" Text="ErrorMessage" Foreground="OrangeRed" />
             </StackPanel>
 
@@ -122,10 +122,10 @@
 
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
                     Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="BtnUpdate" 
-                    Height="50" Width="120" Content="수정" FontSize="14" 
+            <Button x:Name="BtnAdd" 
+                    Height="50" Width="120" Content="입력" FontSize="14" 
                     Background="CornflowerBlue"
-                    Margin="10, 0" Click="BtnUpdate_Click">
+                    Margin="10, 0" Click="BtnAdd_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

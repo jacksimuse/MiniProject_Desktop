@@ -1,18 +1,20 @@
-﻿<Page x:Class="WpfSMSApp.View.Account.MyAccount"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WpfSMSApp.View.Account"
-      mc:Ignorable="d" 
-      d:DesignHeight="630" d:DesignWidth="1200"
-      Title="MyAccount" Loaded="Page_Loaded">
+﻿<Page 
+    x:Class="WpfSMSApp.View.Account.MyAccount"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:WpfSMSApp.View.Account"
+    mc:Ignorable="d" 
+    d:DesignHeight="630" d:DesignWidth="1200"
+    Title="MyAccount" Loaded="Page_Loaded">
     <Page.Resources>
-        <Style TargetType="Label"><!--{x:Type Label}-->
-            <Setter Property="FontSize" Value="16" />
+        <Style TargetType="Label">
+            <!-- {x:Type Label} -->
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
         </Style>
 
         <Style TargetType="TextBlock">
@@ -21,65 +23,67 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Page.Resources>
-    <Grid Margin="10" Background="White">
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="210" />
         </Grid.ColumnDefinitions>
-        <!--제목입력 시작-->
+
+        <!-- 제목입력 시작 -->
         <Label Grid.Row="0" Grid.Column="1" Content="계정정보" FontSize="26" FontWeight="ExtraBold"
-               VerticalContentAlignment="Bottom" HorizontalAlignment="Left"/>
-        <!--제목입력 끝-->
-        
-        <!--버튼영역 시작-->
+               VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
+        <!-- 제목입력 끝 -->
+
+        <!-- 버튼영역 시작 -->
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Button x:Name="BtnEditMyAccount" 
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
-                    Content="계정정보 수정" Height="50" Margin="5, 10" Click="BtnEditMyAccount_Click"  >
+                    Content="계정정보 수정" Height="50" Margin="5, 10" Click="BtnEditMyAccount_Click">
             </Button>
         </StackPanel>
-        <!--버튼영역 끝-->
-        <!--컨텐츠영역 시작-->
+        <!-- 버튼영역 끝 -->
+
+        <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="순번" FontSize="14" />
-            <Label Grid.Row="1" Grid.Column="0" Content="사번" FontSize="14" />
-            <Label Grid.Row="2" Grid.Column="0" Content="성" FontSize="14" />
-            <Label Grid.Row="3" Grid.Column="0" Content="이름" FontSize="14" />
-            <Label Grid.Row="4" Grid.Column="0" Content="이메일" FontSize="14" />
-            <Label Grid.Row="5" Grid.Column="0" Content="관리자여부" FontSize="14" />
-            <Label Grid.Row="6" Grid.Column="0" Content="활성여부" FontSize="14" />
+            <Label Grid.Row="0" Grid.Column="0" Content="순번" />
+            <Label Grid.Row="1" Grid.Column="0" Content="사번" />
+            <Label Grid.Row="2" Grid.Column="0" Content="성" />
+            <Label Grid.Row="3" Grid.Column="0" Content="이름" />
+            <Label Grid.Row="4" Grid.Column="0" Content="이메일" />
+            <Label Grid.Row="5" Grid.Column="0" Content="관리자여부" />
+            <Label Grid.Row="6" Grid.Column="0" Content="활성여부" />
 
             <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtUserID" Text="UserID" />
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtUserIdentityNumber" Text="UserIdentityNumber" />
-            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtUserName" Text="UserName" />
-            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtUserSurname" Text="UserSurname" />
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtUserSurName" Text="UserSurName" />
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtUserName" Text="UserName" />
             <TextBlock Grid.Row="4" Grid.Column="1" x:Name="TxtUserEmail" Text="UserEmail" />
             <TextBlock Grid.Row="5" Grid.Column="1" x:Name="TxtUserAdmin" Text="UserAdmin" />
             <TextBlock Grid.Row="6" Grid.Column="1" x:Name="TxtUserActivated" Text="UserActivated" />
         </Grid>
-        <!--컨텐츠영역 끝-->
-        
+        <!-- 컨텐츠영역 끝 -->
     </Grid>
 </Page>

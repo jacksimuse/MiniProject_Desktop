@@ -46,8 +46,7 @@
             <Button x:Name="BtnAddUser" 
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
-                    Content="사용자추가" Height="50" Margin="5,10,5,5" Click="BtnAddUser_Click">
-            </Button>
+                    Content="사용자추가" Height="50" Margin="5,10,5,5" Click="BtnAddUser_Click"/>
             <Button x:Name="BtnEditUser" 
                     FontSize="14"
                     Background="DarkSlateBlue" Foreground="White"
@@ -82,9 +81,9 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <RadioButton Content="모두" Margin="5, 0"></RadioButton>
-                <RadioButton Content="활성" Margin="5, 0"></RadioButton>
-                <RadioButton Content="비활성" Margin="5, 0"></RadioButton>
+                <RadioButton x:Name="RdoAll" Content="모두" Margin="5, 0" Checked="RdoAll_Checked"></RadioButton>
+                <RadioButton x:Name="RdoActive" Content="활성" Margin="5, 0" Checked="RdoActive_Checked"></RadioButton>
+                <RadioButton x:Name="RdoDeactive" Content="비활성" Margin="5, 0" Checked="RdoDeactive_Checked"></RadioButton>
             </StackPanel>
 
             <DataGrid x:Name="GrdData" Grid.Row="1">

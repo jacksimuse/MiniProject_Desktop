@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfSMSApp.View.Account
 {
@@ -32,7 +21,7 @@ namespace WpfSMSApp.View.Account
                 var user = Commons.LOGINED_USER;
                 TxtUserID.Text = user.UserID.ToString();
                 TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurname.Text = user.UserName.ToString();
+                TxtUserSurName.Text = user.UserSurname.ToString();
                 TxtUserName.Text = user.UserName.ToString();
                 TxtUserEmail.Text = user.UserEmail.ToString();
                 TxtUserAdmin.Text = user.UserAdmin.ToString();
@@ -40,14 +29,14 @@ namespace WpfSMSApp.View.Account
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 MYAccount Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 MyAccount Loaded : {ex}");
                 throw ex;
             }
         }
 
         private void BtnEditMyAccount_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditAccount());
+            NavigationService.Navigate(new EditAccount()); // 계정정보 수정 화면으로 변경
         }
     }
 }

@@ -8,15 +8,15 @@ using WpfSMSApp.Model;
 
 namespace WpfSMSApp.Logic
 {
-    public class DataAcess
+    public class DataAccess
     {
         public static List<User> GetUsers()
         {
             List<User> users;
 
-            using (var ctx = new SMSEntities()) 
+            using (var ctx = new SMSEntities())
             {
-                users = ctx.User.ToList(); // = SELECT * FROM users
+                users = ctx.User.ToList(); // = SELECT * FROM user
             }
 
             return users;
@@ -27,7 +27,7 @@ namespace WpfSMSApp.Logic
         /// </summary>
         /// <param name="user"></param>
         /// <returns>0또는 1이상</returns>
-        internal static int SetUser(User user)
+        public static int SetUser(User user)
         {
             using (var ctx = new SMSEntities())
             {
