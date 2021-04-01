@@ -37,7 +37,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- 제목입력 시작 -->
-        <Label Grid.Row="0" Grid.Column="1" Content="계정정보 수정" FontSize="26" FontWeight="ExtraBold"
+        <Label Grid.Row="0" Grid.Column="1" Content="사용자정보 입력" FontSize="26" FontWeight="ExtraBold"
                VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
         <!-- 제목입력 끝 -->
 

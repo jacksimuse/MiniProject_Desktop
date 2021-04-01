@@ -35,5 +35,38 @@ namespace WpfSMSApp.Logic
                 return ctx.SaveChanges(); // commit
             }
         }
+
+        public static List<Stock> GetStocks()
+        {
+            List<Stock> stocks;
+
+            using (var ctx = new SMSEntities())
+            {
+                stocks = ctx.Stock.ToList(); // = SELECT * FROM stocks
+            }
+
+            return stocks;
+        }
+
+        public static List<Store> GetStores()
+        {
+            List<Store> stores;
+
+            using (var ctx = new SMSEntities())
+            {
+                stores = ctx.Store.ToList(); // = SELECT * FROM stores
+            }
+
+            return stores;
+        }
+
+        public static int SetStore(Store store)
+        {
+            using (var ctx = new SMSEntities())
+            {
+                ctx.Store.AddOrUpdate(store);
+                return ctx.SaveChanges(); // commit
+            }
+        }
     }
 }

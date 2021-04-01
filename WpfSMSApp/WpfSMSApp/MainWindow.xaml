@@ -79,7 +79,7 @@
                     Grid.Column="3" 
                     Content="창고" FontSize="16" 
                     Foreground="White" Background="CadetBlue"
-                    Margin="5, 10">
+                    Margin="5, 10" Click="BtnStore_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

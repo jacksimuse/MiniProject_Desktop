@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfSMSApp.View;
 using WpfSMSApp.View.Account;
+using WpfSMSApp.View.Store;
 using WpfSMSApp.View.User;
 
 namespace WpfSMSApp
@@ -86,6 +87,19 @@ namespace WpfSMSApp
             {
                 Commons.LOGGER.Error($"예외발생 BtnUser_Click : {ex}");
                 await this.ShowMessageAsync("예외", $"예외발생 : {ex}");
+            }
+        }
+
+        private void BtnStore_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ActiveControl.Content = new StoreList();
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 BtnStore_Click : {ex}");
+                this.ShowMessageAsync("예외", $"예외발생 : {ex}");
             }
         }
     }

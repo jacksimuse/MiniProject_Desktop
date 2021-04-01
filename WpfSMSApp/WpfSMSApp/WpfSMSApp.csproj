@@ -185,8 +185,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\StockStore.cs" />
     <Compile Include="View\Account\EditAccount.xaml.cs">
       <DependentUpon>EditAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Store\AddStore.xaml.cs">
+      <DependentUpon>AddStore.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\User\EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
@@ -196,6 +200,9 @@
     </Compile>
     <Compile Include="View\User\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Store\StoreList.xaml.cs">
+      <DependentUpon>StoreList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\User\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
@@ -224,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Store\AddStore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\User\EditUser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,6 +244,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\User\AddUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Store\StoreList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -325,6 +340,12 @@
     <None Include="Model\SMSModel.edmx.diagram">
       <DependentUpon>SMSModel.edmx</DependentUpon>
     </None>
+    <None Include="NanumGothic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="NanumGothicBold.ttf" />
+    <Resource Include="NanumGothicExtraBold.ttf" />
+    <Resource Include="NanumGothicLight.ttf" />
     <None Include="NLog.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

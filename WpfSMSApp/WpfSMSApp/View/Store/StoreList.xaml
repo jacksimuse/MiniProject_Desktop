@@ -1,0 +1,116 @@
+﻿<Page 
+    x:Class="WpfSMSApp.View.Store.StoreList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:WpfSMSApp.View.Store" 
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    mc:Ignorable="d" 
+    d:DesignHeight="630" d:DesignWidth="1200"
+    Title="StoreList" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <!-- {x:Type Label} -->
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="10, 0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="10" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="210" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 제목입력 시작 -->
+        <Label Grid.Row="0" Grid.Column="1" Content="창고리스트" FontSize="26" FontWeight="ExtraBold"
+               VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" />
+        <!-- 제목입력 끝 -->
+
+        <!-- 버튼영역 시작 -->
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+            <Button x:Name="BtnAddStore" 
+                    FontSize="14"
+                    Background="DarkSlateBlue" Foreground="White"
+                    Content="창고추가" Height="50" Margin="5,10,5,5" Click="BtnAddStore_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                            <iconPacks:PackIconMaterialDesign Kind="AddCircle" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnEditStore" 
+                    FontSize="14"
+                    Background="DarkSlateBlue" Foreground="White"
+                    Content="창고수정" Height="50" Margin="5,5" Click="BtnEditStore_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                            <iconPacks:PackIconFontAwesome Kind="PenSolid" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnExportExcel" 
+                    FontSize="14"
+                    Background="Silver" Foreground="Black"
+                    Content="Excel익스포트" Height="50" Margin="5,5" Click="BtnExportExcel_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                            <iconPacks:PackIconFileIcons Kind="Excel" Width="24" Height="24" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+        <!-- 버튼영역 끝 -->
+
+        <!-- 컨텐츠영역 시작 -->
+        <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="89*"/>
+                <ColumnDefinition Width="851*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+
+            </StackPanel>
+
+            <DataGrid x:Name="GrdData"
+                      AutoGenerateColumns="False" SelectionUnit="FullRow"
+                      GridLinesVisibility="Vertical" 
+                      Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                      ItemsSource="{Binding}" Grid.ColumnSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding StoreID}" Header="순번" Width="60" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding StoreName}" Header="창고명" Width="1*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding StoreLocation}" Header="창고위치" Width="1*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding StockQuantity}" Header="재고수" Width="1*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!-- 컨텐츠영역 끝 -->
+    </Grid>
+</Page>
