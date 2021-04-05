@@ -1,8 +1,11 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using NaverMovieFinderApp.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -36,6 +39,7 @@ namespace NaverMovieFinderApp
             if (string.IsNullOrEmpty(TxtMovieName.Text))
             {
                 StsResult.Content = "검색할 영화명을 입력 후, 검색버튼을 눌러주세요";
+                Commons.ShowMessageAsync("검색", "검색할 영화명을 입력 후, 검색버튼을 눌러주세요");
                 return;
             }
 
@@ -43,13 +47,15 @@ namespace NaverMovieFinderApp
             try
             {
                 ProcSearchNaverApi(TxtMovieName.Text);
+                Commons.ShowMessageAsync("검색", "영화검색 완료");
             }
             catch (Exception ex)
             {
                 Commons.ShowMessageAsync("예외", $"예외발생 : {ex}");
                 Commons.Logger.Error($"예외발생 : {ex}");
             }
-            
+
+            Commons.IsFavorite = false; // 즐겨찾기 아님
         }
 
         private void ProcSearchNaverApi(string movieName)
@@ -112,6 +118,19 @@ namespace NaverMovieFinderApp
                     ImgPoster.Source = new BitmapImage(new Uri(movie.Image, UriKind.RelativeOrAbsolute));
                 }
             }
+            if (GrdData.SelectedItem is NaverFavoriteMovies)
+            {
+                var movie = GrdData.SelectedItem as NaverFavoriteMovies;
+                //Commons.ShowMessageAsync("결과", $"{movie.Image}");
+                if (string.IsNullOrEmpty(movie.Image))
+                {
+                    ImgPoster.Source = new BitmapImage(new Uri("No_Picutre.jpg", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    ImgPoster.Source = new BitmapImage(new Uri(movie.Image, UriKind.RelativeOrAbsolute));
+                }
+            }
         }
 
         private void BtnAddWatchList_Click(object sender, RoutedEventArgs e)
@@ -122,6 +141,11 @@ namespace NaverMovieFinderApp
                 return;
             }
 
+            if (Commons.IsFavorite) // 이미 즐겨찾기한 내용을 막아주기 위한 것
+            {
+                Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기 조회내용을 다시 즐겨찾기할 수 없습니다");
+                return;
+            }
             List<NaverFavoriteMovies> list = new List<NaverFavoriteMovies>();
 
             foreach (Movieitem item in GrdData.SelectedItems)
@@ -146,6 +170,8 @@ namespace NaverMovieFinderApp
             {
                 using (var ctx = new OpenApiLabEntities())
                 {
+
+                    // ctx.NaverFavoriteMovies.AddRange(list); 아래와 차이없음
                     ctx.Set<NaverFavoriteMovies>().AddRange(list);
                     ctx.SaveChanges();
                 }
@@ -166,9 +192,8 @@ namespace NaverMovieFinderApp
             this.DataContext = null;
             TxtMovieName.Text = "";
 
-            List<Movieitem> listData = new List<Movieitem>();
+            //List<Movieitem> listData = new List<Movieitem>();
             List<NaverFavoriteMovies> list = new List<NaverFavoriteMovies>();
-
 
             try
             {
@@ -176,43 +201,138 @@ namespace NaverMovieFinderApp
                 {
                     list = ctx.NaverFavoriteMovies.ToList();
                 }
+                this.DataContext = list;
+                StsResult.Content = $"즐겨찾기 {list.Count}개 조회";
+                if (Commons.IsDelete)
+                    Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기 삭제 완료");
+                else
+                    Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기보기 조회 완료");
+
+                Commons.IsFavorite = true; // 즐겨찾기 맞음
             }
             catch (Exception ex)
             {
                 Commons.ShowMessageAsync("예외", $"예외발생 : {ex}");
                 Commons.Logger.Error($"예외발생 : {ex}");
+                Commons.IsFavorite = false; // 한번더 명시적으로 처리
             }
 
-            foreach (var item in list)
-            {
-                listData.Add(new Movieitem(
-                    item.Title,
-                    item.Link,
-                    item.Image,
-                    item.SubTitle,
-                    item.PubDate,
-                    item.Director,
-                    item.Actor,
-                    item.UserRating
-                    ));
-            }
+            Commons.IsDelete = false;
 
-            this.DataContext = listData;
+            /* 변환 필요없음
+            //foreach (var item in list)
+            //{
+            //    listData.Add(new Movieitem(
+            //        item.Title,
+            //        item.Link,
+            //        item.Image,
+            //        item.SubTitle,
+            //        item.PubDate,
+            //        item.Director,
+            //        item.Actor,
+            //        item.UserRating
+            //        ));
+            //}
+
+            //this.DataContext = listData;
+            //StsResult.Content = $"즐겨찾기 {listData.Count}개 조회";
+            //Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기보기 조회 완료");
+            //Commons.IsFavorite = true; // 즐겨찾기 맞음 */
+
         }
 
         private void BtnDeleteWatchList_Click(object sender, RoutedEventArgs e)
         {
+            if (Commons.IsFavorite == false)
+            {
+                Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기 내용이 아니면 삭제할 수 없습니다");
+                return;
+            }
+            if (GrdData.SelectedItems.Count == 0)
+            {
+                Commons.ShowMessageAsync("즐겨찾기", "삭제할 즐겨찾기 영화를 선택하세요");
+                return;
+            }
 
+            //List<NaverFavoriteMovies> removeList = new List<NaverFavoriteMovies>();
+            foreach (NaverFavoriteMovies item in GrdData.SelectedItems)
+            {
+                using (var ctx = new OpenApiLabEntities())
+                {
+                    var itemDelete = ctx.NaverFavoriteMovies.Find(item.Idx); // 삭제할 영화 객체 검색 후 생성
+                    ctx.Entry(itemDelete).State = EntityState.Deleted; // 검색객체 상태를 삭제로 변경
+                    ctx.SaveChanges();
+                }
+            }
+
+            Commons.IsDelete = true;
+            // 조회쿼리 다시
+            BtnViewWatchList_Click(sender, e);
         }
 
         private void BtnWatchTrailer_Click(object sender, RoutedEventArgs e)
         {
+            if (GrdData.SelectedItems.Count == 0)
+            {
+                Commons.ShowMessageAsync("유튜브영화", "영화를 선택하세요");
+                return;
+            }
+            if (GrdData.SelectedItems.Count > 1)
+            {
+                Commons.ShowMessageAsync("유튜브영화", "영화를 하나만 선택하세요");
+                return;
+            }
 
+            string movieName = "";
+            if (Commons.IsFavorite) // 즐겨찾기
+            {
+                var item = GrdData.SelectedItem as NaverFavoriteMovies;
+                movieName = item.Title;
+            }
+            else // 네이버API
+            {
+                var item = GrdData.SelectedItem as Movieitem;
+                movieName = item.Title;
+            }
+
+            var trailerWindow = new TrailerWindow(movieName);
+            trailerWindow.Owner = this;
+            trailerWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            trailerWindow.ShowDialog();
         }
 
         private void BtnNaverMovieLink_Click(object sender, RoutedEventArgs e)
         {
+            if (GrdData.SelectedItems.Count == 0)
+            {
+                Commons.ShowMessageAsync("네이버영화", "영화를 선택하세요");
+                return;
+            }
+            
+            if (GrdData.SelectedCells.Count > 1)
+            {
+                Commons.ShowMessageAsync("네이버영화", "영화를 하나만 선택하세요");
+            }
 
+            // 선택된 영화 네이버영화 URL 가져오기
+            string linkUrl = "";
+            if (Commons.IsFavorite) // 즐겨찾기
+            {
+                var item = GrdData.SelectedItem as NaverFavoriteMovies;
+                linkUrl = item.Link;
+            }
+            else // 네이버API
+            {
+                var item = GrdData.SelectedItem as Movieitem;
+                linkUrl = item.Link;
+            }
+
+            Process.Start(linkUrl); // 웹 브라우저 띄우기
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine($"즐겨찾기 여부{Commons.IsFavorite}");
         }
     }
 }
