@@ -102,5 +102,17 @@ namespace WpfSMSApp
                 this.ShowMessageAsync("예외", $"예외발생 : {ex}");
             }
         }
+
+        private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = await this.ShowMessageAsync("종료", "프로그램 종료할까요?",
+                MessageDialogStyle.AffirmativeAndNegative, null);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                Commons.LOGGER.Info("프로그램 종료");
+               Environment.Exit(0); // 프로그램 종료            
+            }
+        }
     }
 }

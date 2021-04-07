@@ -11,7 +11,7 @@
     Title="Stock Management System" Height="700" Width="1200" 
     Icon="/Resources/stock.png"
     ContentRendered="MetroWindow_ContentRendered" Activated="MetroWindow_Activated"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen" Closing="MetroWindow_Closing">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Button x:Name="BtnLoginedId" />

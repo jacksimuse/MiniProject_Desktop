@@ -12,17 +12,43 @@ namespace WpfSMSApp.View.Store
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class AddStore : Page
+    public partial class EditStore : Page
     {
-        public AddStore()
+        private int StoreID { get; set; }
+        private Model.Store CurrentStore {get;set;}
+
+        public EditStore()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 추가생성자 StoreList에서 storeId를 받아옴
+        /// </summary>
+        /// <param name="storeId"></param>
+        public EditStore(int storeId) : this()
+        {
+            StoreID = storeId;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LblStoreName.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
             TxtStoreID.Text = TxtStoreName.Text = TxtStoreLocation.Text = "";
+
+            try
+            {
+                // Store테이블에서 내용 읽음
+                CurrentStore = Logic.DataAccess.GetStores().Where(s => s.StoreID.Equals(StoreID)).FirstOrDefault();
+                TxtStoreID.Text = CurrentStore.StoreID.ToString();
+                TxtStoreName.Text = CurrentStore.StoreName;
+                TxtStoreLocation.Text = CurrentStore.StoreLocation;
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error( $"EditStore.xaml.cs Page_Loaded 예외발생 : {ex}");
+                Commons.ShowMessageAsync("예외발생", $"예외발생 : {ex}");
+            }
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -30,7 +56,7 @@ namespace WpfSMSApp.View.Store
             NavigationService.GoBack();
         }
 
-        bool IsValid = true; // 지역변수 -> 전역변수
+       bool IsValid = true; // 지역변수 -> 전역변수
 
         public bool IsValidInput()
         {
@@ -61,24 +87,24 @@ namespace WpfSMSApp.View.Store
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
             LblStoreName.Visibility = LblStoreLocation.Visibility = Visibility.Hidden;
 
-            var store = new Model.Store();
             IsValid = IsValidInput(); // 유효성 체크(필수)
 
             if (IsValid)
             {
                 //MessageBox.Show("DB 입력처리!");
-                store.StoreName = TxtStoreName.Text;
-                store.StoreLocation = TxtStoreLocation.Text;
+                CurrentStore.StoreName = TxtStoreName.Text;
+                CurrentStore.StoreLocation = TxtStoreLocation.Text;
 
                 try
                 {
-                    var result = Logic.DataAccess.SetStore(store);
+                    var result = Logic.DataAccess.SetStore(CurrentStore);
                     if (result == 0)
                     {
                         // 수정 안됨
-                        Commons.LOGGER.Error("AddStore.xaml.cs 창고정보 저장오류 발생");
+                        Commons.LOGGER.Error("AddStore.xaml.cs 창고정보 수정오류 발생");
                         Commons.ShowMessageAsync("오류", "저장시 오류가 발생했습니다");
                     }
                     else
@@ -101,6 +127,11 @@ namespace WpfSMSApp.View.Store
         private void TxtStoreLocation_LostFocus(object sender, RoutedEventArgs e)
         {
             IsValidInput();
+        }
+
+        private void BtnEditStore_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
